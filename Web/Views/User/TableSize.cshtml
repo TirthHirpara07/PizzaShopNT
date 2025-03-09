@@ -1,0 +1,151 @@
+@using Entity.Helper
+@model IEnumerable<Entity.ViewModal.ShowUser>
+@{
+    var pageContent = ViewBag.pageContent as Pagination;
+}
+<div class="col-12 table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name <img src="../images/icons/sort-up.svg" alt="" height="20" width="20" id="NameSort">
+                    </th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Role <img src="../images/icons/sort-up.svg" alt="" height="20" width="20" id="RoleSort">
+                    </th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @{
+                foreach (var user in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="~/ProfilePhotos/@user.UserImg" alt="" height="30" width="30">
+                            <span>@user.Name </span>
+                        </td>
+                        <td>@user.Email</td>
+                        <td>@user.PhoneNo </td>
+                        <td>@user.Role</td>
+                        <td>
+                            @if (user.Status == true)
+                            {
+                                <div class="bg-success py-2 rounded-pill d-flex align-item-center justify-content-center">
+                                    <span>Active</span>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="bg-danger py-2 rounded-pill d-flex align-item-center justify-content-center ">
+                                    <span>InActive</span>
+                                </div>
+                            }
+
+                        </td>
+                        <td>
+                            <a asp-controller="user" asp-action="UpdateUser" asp-route-id="@user.UserId"><img class="m-2"
+                                    src="/images/icons/editLogo.svg" alt="" height="25" width="25"></a>
+                            <img class="m-2" class="deleterow" src="/images/icons/deleteIcon.svg" alt=""
+                                onclick="GetId(@user.UserId)" height="25" width="25" data-bs-toggle="modal"
+                                data-bs-target="#deletemodal">
+                        </td>
+
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+@* pagination *@
+<div class="d-flex align-item-center justify-content-end table-responsive">
+    <div class="my-2 mx-1 d-flex">
+        <span class="m-2">Items per Pages</span>
+
+        <select class="h-50  px-3 m-2" aria-label=".form-select-sm example" id="itemperpage">
+            <option value="1" selected="@( pageContent.pageSize ==1 ? "selected" : null )">1</option>
+            <option value="2" selected="@( pageContent.pageSize ==2 ? "selected" : null )">2</option>
+            <option value="3" selected="@( pageContent.pageSize ==3 ? "selected" : null )">3</option>
+            <option value="4" selected="@( pageContent.pageSize ==4 ? "selected" : null )">4</option>
+            <option value="5" selected="@( pageContent.pageSize ==5 ? "selected" : null )">5</option>
+            <option value="6" selected="@( pageContent.pageSize ==6 ? "selected" : null )">6</option>
+            <option value="7" selected="@( pageContent.pageSize ==7 ? "selected" : null )">7</option>
+            <option value="8" selected="@( pageContent.pageSize ==8 ? "selected" : null )">8</option>
+        </select>
+        <span class="m-2">Showing @pageContent.start-@pageContent.end of @pageContent.count</span>
+        <ul class="pagination">
+            <li class="page-item">
+                @if (pageContent.page > 0)
+                {
+                    
+                        <a class="page-link PreviousButton" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    
+                }
+                else
+                {
+                    
+                        <a class="page-link PreviousButton disabled" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                  
+                }
+            </li>
+            <li class="page-item">
+                @if (pageContent.page >= pageContent.maxPage- 1)
+                {
+                
+                        <a class="page-link NextButton disabled" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                   
+                }
+                else
+                {
+                   
+                        <a class="page-link NextButton" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    
+                }
+
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<!--delete modal -->
+<div class="modal fade" id="deletemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex  align-item-center justify-content-center">
+                <img src="/images/icons/alertIcon.svg" alt="" height="30" width="30">
+                <span>Are you sure you want to delete this user</span>
+            </div>
+            <div class="modal-footer d-flex align-item-center justify-content-center">
+                <form asp-controller="user" asp-action="deleteuser">
+                    <input type="number" id="deleteuserid" name="id" value="" hidden>
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var currentPage =@ViewBag.pageContent.page;
+    var currentPageSize = @ViewBag.pageContent.pageSize;
+    var currentStart =  @ViewBag.pageContent.start;
+    var currentSortColumn = "@ViewBag.pageContent.sortColumn";
+    var currentSortOrder = "@ViewBag.pageContent.currOrder";
+    var currentSearch = "@ViewBag.pageContent.search";
+    var currentCount = @ViewBag.pageContent.count;
+</script>

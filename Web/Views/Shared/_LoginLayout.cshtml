@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PizzaShop</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+
+<body class="m-0 p-0 vh-100">
+    
+        <div class="masterdivLoginPages ">
+            <div class="row vh-100 w-100 p-0 m-0" id="PizzaBg">
+                <div class="col-md-6 h-100 p-0" id="PizzaImg ">
+                    <img src="/images/dominos_background.jpg" class="h-100 w-100" alt="">
+                </div>
+                <div class="col-md-6 p-2 d-flex justify-content-center align-items-center">
+                    <div class="col-9 LoginPageContent">
+                        <div class="row">
+                            <!-- Company Logo and Name -->
+                            <div class="col-12 d-flex justify-content-center align-itens-center">
+                                <img src="/images/logos/pizzashop_logo.png" height="100" width="100" alt="">
+                                <div class="h3 d-flex justify-content-center align-items-center pizza-text"
+                                    id="CompanyName">
+                                    PIZZASHOP</div>
+                            </div>
+                            <!--  Page context -->
+                            <div>
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await Component.InvokeAsync("Notyf")
+@* @RenderSection("Scripts", required: false) *@

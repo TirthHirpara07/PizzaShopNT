@@ -1,0 +1,125 @@
+.masterdivLoginPages{
+  background-color: #d8eff8;
+  height: 100vh;
+  width: 100%;
+}
+.ImgInput{
+  position: absolute;
+  right: 6%;
+  top:34%
+}
+.pizza-text{
+  color: #3b78ab;
+}
+#RememberMe-ForgetPass{
+  flex-grow: 1;
+}
+
+#CategoryList{
+  height: 390px;
+  overflow: auto;
+}
+
+#FileUpload{
+  border: 2px solid gray;
+  border-style: dashed;
+  height: 100px;
+}
+
+.SidebarToggle{
+  display: none;
+}
+.modifierside{
+  background-color: #fff4e4;
+}
+
+.profilebgimg{
+  height: 50px;
+  width: 100%;
+}
+.profilephoto{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  top: -25px;
+  left: 20px;
+}
+
+
+.camera-icon {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  background: white;
+  border-radius: 50%;
+  padding: 0px 5px 0px 5px;
+  font-size: 18px;
+  color: #000000;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+}
+.camera-icon input{
+opacity: 0;
+width: 30px;
+  height: 30px;
+  position: absolute;
+  cursor: pointer; 
+  bottom: 5px; 
+  right: 5px;
+}
+.camera-icon:hover {
+  transform: scale(1.1);
+}
+
+/* --------------------------------------------------------------------------Media Queries------------------------------------------------------------- */
+
+
+@media (max-width:1080px){
+  #Sidebar .fs-5,  .fs-4 {
+      zoom: 70%;
+  }
+  #AddCategory{
+      zoom: 60%;
+  }
+ 
+}
+@media (min-width:768px) {
+  #Sidebar , .CompanyName{
+
+      display: block;
+  }   
+}
+
+@media (max-width:767px){
+  #PizzaImg, #CompanyName{
+      display:none;
+  }
+  #PizzaBg{
+      background-image: url("/images/dominos_background.jpg");
+      background-position: center;
+      background-size: cover;
+      background-color: rgba(0, 0, 0, 0.3);
+      background-repeat: no-repeat;
+
+  }
+  .LoginPageText{
+      color: #ffffff;
+  }
+  .LoginPageContent{
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      padding: 5%;
+  }
+  #Sidebar , .CompanyName{
+
+      display: none;
+  }
+  #ToggleSidebar{
+      position: absolute;
+      left: 0;
+  }
+}

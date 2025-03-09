@@ -1,0 +1,97 @@
+<div class="container p-0 m-0">
+        <div>
+            <div class="col-2">
+                <a class="text-decoration-none fs-2 fw-bolder" href="#">Menu</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 p-0">
+        <div class="row">
+            <div class=" mb-2 bg-white ">
+                <div class="col-12 d-flex">
+                    <div class="m-1 p-2 border-bottom border-primary">
+                        <a href=""><img src="/images/icons/icons8-list.svg" alt="" height="20" width="20"></a>
+                        <span class="text-primary">Items</span>
+                    </div>
+                    <div class="m-1 p-2">
+                        <a href=""><img src="/images/icons/category-svgrepo-com.svg" alt="" height="20" width="20"></a>
+                        <span class="text-primary">Modifiers</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white ">
+                <div class="row">
+                    <div class="col-12 col-md-3 col-lg-4" style="background-color: #f6f6f6;">
+                        @* partialviewforcategory *@
+                        <partial name="ParialCategory.cshtml" />
+                    </div>
+                    <div class="col-12 col-md-9 col-lg-8">
+                        @* partialviewforitemstable *@
+                        <partial name="PartialItemTable.cshtml" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+    <!-- delete modal -->
+    <div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="">Delete Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex  align-item-center justify-content-center">
+                    <img src="/images/icons/alertIcon.svg" alt="" height="30" width="30">
+                    <span>Are you sure you want to delete</span>
+                </div>
+                <div class="modal-footer d-flex align-item-center justify-content-center">
+                    <button type="button" class="btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add category modal -->
+    <div class="modal fade" id="AddCategoryModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="">Add Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex flex-column  align-item-center justify-content-center">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingDescription" placeholder="Name">
+                        <label for="floatingDescription">Name</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingCategoryDescription"
+                            placeholder="Description">
+                        <label for="floatingCategoryDescription">Description</label>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex align-item-center justify-content-end">
+                    <button type="button" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="EditItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-body ">
+                    @* partial view for edit modal *@
+                </div>
+            </div>
+        </div>
+    </div>
