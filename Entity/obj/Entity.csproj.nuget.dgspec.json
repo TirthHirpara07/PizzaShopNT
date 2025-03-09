@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\ASUS\\Downloads\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Entity\\Entity.csproj": {}
+    "C:\\Users\\ASUS\\source\\repos\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Entity\\Entity.csproj": {}
   },
   "projects": {
-    "c:\\Users\\ASUS\\Downloads\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Entity\\Entity.csproj": {
+    "C:\\Users\\ASUS\\source\\repos\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Entity\\Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\ASUS\\Downloads\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Entity\\Entity.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Entity\\Entity.csproj",
         "projectName": "Entity",
-        "projectPath": "c:\\Users\\ASUS\\Downloads\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Entity\\Entity.csproj",
+        "projectPath": "C:\\Users\\ASUS\\source\\repos\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Entity\\Entity.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\ASUS\\Downloads\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Entity\\obj\\",
+        "outputPath": "C:\\Users\\ASUS\\source\\repos\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Entity\\obj\\",
         "projectStyle": "PackageReference",
         "centralPackageVersionsManagementEnabled": true,
         "configFilePaths": [

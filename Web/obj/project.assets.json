@@ -6747,11 +6747,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ASUS\\Downloads\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Web\\Web.csproj",
+      "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Web\\Web.csproj",
       "projectName": "Web",
-      "projectPath": "C:\\Users\\ASUS\\Downloads\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Web\\Web.csproj",
+      "projectPath": "C:\\Users\\ASUS\\source\\repos\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Web\\Web.csproj",
       "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ASUS\\Downloads\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Web\\obj\\",
+      "outputPath": "C:\\Users\\ASUS\\source\\repos\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Web\\obj\\",
       "projectStyle": "PackageReference",
       "centralPackageVersionsManagementEnabled": true,
       "configFilePaths": [
@@ -6770,11 +6770,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "c:\\Users\\ASUS\\Downloads\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Entity\\Entity.csproj": {
-              "projectPath": "c:\\Users\\ASUS\\Downloads\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Entity\\Entity.csproj"
+            "C:\\Users\\ASUS\\source\\repos\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Entity\\Entity.csproj": {
+              "projectPath": "C:\\Users\\ASUS\\source\\repos\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Entity\\Entity.csproj"
             },
-            "C:\\Users\\ASUS\\Downloads\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Service\\Service.csproj": {
-              "projectPath": "C:\\Users\\ASUS\\Downloads\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Service\\Service.csproj"
+            "C:\\Users\\ASUS\\source\\repos\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Service\\Service.csproj": {
+              "projectPath": "C:\\Users\\ASUS\\source\\repos\\PizzaShopProject-main (1)\\PizzaShopProject-main\\Backend\\PizzaShopNT\\Service\\Service.csproj"
             }
           }
         }
@@ -6871,5 +6871,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json."
+    }
+  ]
 }
