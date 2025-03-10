@@ -1,0 +1,259 @@
+﻿@{
+    var Username= Context.Session.GetString("Username");
+    var UserImg= Context.Session.GetString("UserImg");
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PizzaShop</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+
+<body class="m-0 p-0 vh-100">
+
+  
+        <div class="row masterdivDashboard vh-100 w-100 p-0 m-0">
+            <!-- Sidebar -->
+            <div id="Sidebar" class="col-2 col-md-3 col-lg-3 col-xl-2  pr-0">
+                <div class="row w-100 bg-white ">
+                    <div class="col-12 m-2 d-flex justify-content-center">
+                        <div class="d-flex align-item-center justify-content-center">
+                            <img src="~/images/logos/pizzashop_logo.png" class="CompanyLogo" alt="" height="70"
+                                width="70">
+                        </div>
+                        <div class="py-3">
+                            <span class="fs-4 CompanyName fw-bolder text-info">PIZZASHOP</span>
+                        </div>
+                    </div>
+                    <div class="col-12 SidebarList ">
+                        <div class="row">
+                            <ul class="list-unstyled col-12 p-0">
+                                <li class="m-3 d-flex  align-items-center">
+                                    <img src="/images/icons/total-orders.svg" alt="" height="30" width="30"
+                                        class="me-3">
+                                    <a asp-controller="Dashboard"asp-action="index"  class="text-decoration-none text-dark"><span
+                                            class="SidebarText fw-bold fs-5 ">Dashboard</span></a>
+                                </li>
+                                <li class="m-3 d-flex  align-items-center">
+                                    <img src="/images/icons/total-orders.svg" alt="" height="30" width="30"
+                                        class="me-3">
+                                    <a class="text-decoration-none text-dark" asp-controller="User"
+                                        asp-action="index"><span class="SidebarText fw-bold fs-5 ">Users</span></a>
+                                </li>
+                                <li class="m-3 d-flex  align-items-center">
+                                    <img src="/images/icons/total-orders.svg" alt="" height="30" width="30"
+                                        class="me-3">
+                                    <a asp-controller="RolePermission"
+                                        asp-action="index" class="text-decoration-none text-dark"><span
+                                            class="SidebarText fw-bold fs-5 ">Role and Permission</span></a>
+                                </li>
+                                <li class="m-3 d-flex  align-items-center">
+                                    <img src="/images/icons/total-orders.svg" alt="" height="30" width="30"
+                                        class="me-3">
+                                    <a asp-controller="Menu"
+                                        asp-action="index" class="text-decoration-none text-dark"><span
+                                            class="SidebarText fw-bold fs-5 ">Menu</span></a>
+                                </li>
+                                <li class="m-3 d-flex  align-items-center">
+                                    <img src="/images/icons/total-orders.svg" alt="" height="30" width="30"
+                                        class="me-3">
+                                    <a href="#" class="text-decoration-none text-dark"><span
+                                            class="SidebarText fw-bold fs-5 ">Table and Section</span></a>
+                                </li>
+                                <li class="m-3 d-flex  align-items-center">
+                                    <img src="/images/icons/total-orders.svg" alt="" height="30" width="30"
+                                        class="me-3">
+                                    <a href="#" class="text-decoration-none text-dark"><span
+                                            class="SidebarText fw-bold fs-5 ">Taxes and Fees</span></a>
+                                </li>
+                                <li class="m-3 d-flex  align-items-center">
+                                    <img src="/images/icons/total-orders.svg" alt="" height="30" width="30"
+                                        class="me-3">
+                                    <a href="#" class="text-decoration-none text-dark"><span
+                                            class="SidebarText fw-bold fs-5 ">Orders</span></a>
+                                </li>
+                                <li class="m-3 d-flex  align-items-center   ">
+                                    <img src="/images/icons/total-orders.svg" alt="" height="30" width="30"
+                                        class="me-3">
+                                    <a href="#" class="text-decoration-none text-dark"><span
+                                            class="SidebarText fw-bold fs-5 ">Customers</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="MainContent col-12 col-md-9 col-xl-10  bg-light ">
+                <div class=" row">
+                    <!-- navbar -->
+                    <div class="col-12  bg-info d-flex justify-content-end">
+                        <div class=" d-md-none mt-1 mx-3" id="ToggleSidebar" onclick="SidebarOnClick()">
+                            <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                                aria-controls="offcanvasExample">
+                                <img src="~/images/logos/pizzashop_logo.png" class="CompanyLogo" alt="" height="50"
+                                    width="50">
+                            </a>
+                        </div>
+                        <div>
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <img src="~/ProfilePhotos/@UserImg" alt="" height="50" width="50" style="border-radius: 50%;">
+                            </button>
+                            <table class="dropdown-menu dropdown-menu-end p-3">
+                                <tr>
+                                    <td align="center" colspan="2"><img class="my-2" src="~/ProfilePhotos/@UserImg"
+                                            alt="" height="35" width="35" style="border-radius: 50%;">
+                                        <span class="my-2 ">
+                                            @Username
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right"><img src="~/images/icons/profile.svg" class="me-3" alt=""
+                                            height="20" width="20"></td>
+                                    <td> <a class="text-decoration-none text-black" asp-controller="dashboard" asp-action="profile">
+                                            My Profile
+                                        </a></td>
+                                </tr>
+                                <tr>
+                                    <td><img src="~/images/icons/changePassword.svg" alt="" class="me-3" height="15"
+                                            width="15"></td>
+                                    <td> <a class="text-decoration-none text-black" asp-controller="dashboard" asp-action="ChangePasword">
+                                            Change Password
+                                        </a></td>
+                                </tr>
+                                <tr>
+                                    <td><img src="~/images/icons/logout.svg" alt="" class="me-3" height="15"
+                                            width="15"></td>
+                                    <td> <a data-bs-toggle="modal" data-bs-target="#logoutmodal">
+                                           LogOut
+                                        </a></td>
+                                </tr>
+                            </table>
+
+                        </div>
+
+
+                    </div>
+                    <!-- Content -->
+                    @* viewdata here *@
+                    <div class="col-12">
+
+                        @RenderBody()
+                    </div>
+                   
+
+                </div>
+            </div>
+        </div>
+        <div class=" offcanvas offcanvas-start w-50" tabindex="-1" id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-body">
+
+                <div class="row w-100 bg-white ">
+                    <div class="col-12 m-2 d-flex d-flex justify-content-between">
+                        <div class="d-flex align-item-center justify-content-center">
+                            <img src="/images/logos/pizzashop_logo.png" class="CompanyLogo" alt="" height="70"
+                                width="70">
+                        </div>
+                        <div>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                    </div>
+                    <div class="col-12 SidebarList ">
+                        <div class="row">
+                            <ul class="list-unstyled col-12 p-0">
+                                <li class="m-3 d-flex   align-items-center">
+                                    <img src="/images/icons/total-orders.svg" alt="" height="30" width="30"
+                                        class="me-3">
+                                    <a href="/Navigation/Dashboard.html" class="text-decoration-none text-dark"><span
+                                            class="SidebarText fw-bold fs-5 ">Dashboard</span></a>
+                                </li>
+                                <li class="m-3 d-flex  align-items-center">
+                                    <img src="/images/icons/total-orders.svg" alt="" height="30" width="30"
+                                        class="me-3">
+                                    <a class="text-decoration-none text-dark" asp-controller="User"
+                                        asp-action="UserList"><span class="SidebarText fw-bold fs-5 ">Users</span></a>
+                                </li>
+                                <li class="m-3 d-flex  align-items-center ">
+                                    <img src="/images/icons/total-orders.svg" alt="" height="30" width="30"
+                                        class="me-3">
+                                    <a href="/Navigation/Permission.html" class="text-decoration-none text-dark"><span
+                                            class="SidebarText fw-bold fs-5 ">Role and Permission</span></a>
+                                </li>
+                                <li class="m-3 d-flex  align-items-center">
+                                    <img src="/images/icons/total-orders.svg" alt="" height="30" width="30"
+                                        class="me-3">
+                                    <a href="/Navigation/Menu.html" class="text-decoration-none text-dark"><span
+                                            class="SidebarText fw-bold fs-5 ">Menu</span></a>
+                                </li>
+                                <li class="m-3 d-flex align-items-center ">
+                                    <img src="/images/icons/total-orders.svg" alt="" height="30" width="30"
+                                        class="me-3">
+                                    <a href="#" class="text-decoration-none text-dark"><span
+                                            class="SidebarText fw-bold fs-5 ">Table and Section</span></a>
+                                </li>
+                                <li class="m-3 d-flex align-items-center">
+                                    <img src="/images/icons/total-orders.svg" alt="" height="30" width="30"
+                                        class="me-3">
+                                    <a href="#" class="text-decoration-none text-dark"><span
+                                            class="SidebarText fw-bold fs-5 ">Taxes and Fees</span></a>
+                                </li>
+                                <li class="m-3 d-flex align-items-center">
+                                    <img src="/images/icons/total-orders.svg" alt="" height="30" width="30"
+                                        class="me-3">
+                                    <a href="#" class="text-decoration-none text-dark"><span
+                                            class="SidebarText fw-bold fs-5 ">Orders</span></a>
+                                </li>
+                                <li class="m-3 d-flex  align-items-center">
+                                    <img src="/images/icons/total-orders.svg" alt="" height="30" width="30"
+                                        class="me-3">
+                                    <a href="#" class="text-decoration-none text-dark"><span
+                                            class="SidebarText fw-bold fs-5 ">Customers</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+ @* LogOut Modal *@
+<div class="modal fade" id="logoutmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">LogOut Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex  align-item-center justify-content-center">
+                <img src="/images/icons/alertIcon.svg" alt="" height="30" width="30">
+                <span>Are you sure you want to LogOut</span>
+            </div>
+            <div class="modal-footer d-flex align-item-center justify-content-center">
+                <button type="submit" class="btn btn-primary"><a class="text-decoration-none text-white"  asp-controller="login" asp-action="LogOut">Yes</a></button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await Component.InvokeAsync("Notyf")
+@RenderSection("Scripts", required: false)

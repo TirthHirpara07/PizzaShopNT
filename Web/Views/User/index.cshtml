@@ -1,0 +1,186 @@
+@using Newtonsoft.Json
+@model IEnumerable<Entity.ViewModal.ShowUser>
+@{
+    ViewData["Title"] = "User";
+    Layout = "_Layout";
+}
+<div class="container-fluid p-5 col-12">
+
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between">
+            <div class="col-6">
+                <a class="text-decoration-none fs-2 fw-bolder">User</a>
+            </div>
+            <div class="col-6 pt-2  d-flex align-item-center justify-content-end" id="">
+
+                <div class="row  d-flex align-item-center justify-content-end">
+                    <div class="col-12  d-flex justify-content-end ">
+                        <input type="search" class=" mx-2  d-sm-block form-control" id="SearchItem"
+                            placeholder="Search">
+                        <button type="button" class="btn btn-primary w-100  text-white mx-2">
+                            <a class="page-link" aria-label="AddItem" asp-controller="User" asp-action="AddUser">
+                                <span aria-hidden="true">+ Add User</span>
+                            </a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* userlist *@
+    <div class="col-12 p-0">
+        <div class=" my-4 shadow row p-0" id="userlistpartial">
+            <partial name="TableSize" />
+        </div>
+    </div>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(document).on("change", "#itemperpage", function () {
+            var size = $(this).val();
+            var ps = {
+                page: currentPage,
+                pageSize: size,
+                start: currentStart,
+                sortColumn: currentSortColumn,
+                currOrder: currentSortOrder,
+                search: currentSearch
+            };
+            if (size) {
+                $.ajax({
+                    url: "@Url.Action("TableSize", "User")",
+                    type: 'POST',
+                    data: ps,
+                    success: function (result) {
+                        $('#userlistpartial').html(result);
+
+                    },
+                    error: function (error) {
+                        console.log(error, "error")
+                    }
+                });
+            }
+        });
+        $(document).on("click", ".NextButton", function () {
+            currentPage++;
+            var pa = {
+                page: currentPage,
+                pageSize: currentPageSize,
+                start: currentStart,
+                sortColumn: currentSortColumn,
+                currOrder: currentSortOrder,
+                search: currentSearch,
+                count: currentCount
+            };
+            $.ajax({
+                url: "@Url.Action("TableSize", "User")",
+                type: 'POST',
+                data: pa,
+                success: function (result) {
+                    $('#userlistpartial').html(result);
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            });
+        });
+        $(document).on("click", ".PreviousButton", function () {
+            currentPage--;
+            var p = {
+                page: currentPage,
+                pageSize: currentPageSize,
+                start: currentStart,
+                sortColumn: currentSortColumn,
+                currOrder: currentSortOrder,
+                search: currentSearch,
+                count: currentCount
+            };
+            $.ajax({
+                url: "@Url.Action("TableSize", "User")",
+                type: 'POST',
+                data: p,
+                success: function (result) {
+                    $('#userlistpartial').html(result);
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            });
+        });
+        $(document).on("click", "#NameSort", function () {
+            currentSortOrder = (currentSortOrder == "asc") ? "desc" : "asc"
+            var p = {
+                page: currentPage,
+                pageSize: currentPageSize,
+                start: currentStart,
+                sortColumn: "Name",
+                currOrder: currentSortOrder,
+                search: currentSearch
+            };
+            $.ajax({
+                url: "user/TableSize",
+                type: 'POST',
+                data: p,
+                success: function (result) {
+                    $('#userlistpartial').html(result);
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            });
+        });
+        $(document).on("click", "#RoleSort", function () {
+            currentSortOrder = (currentSortOrder == "asc") ? "desc" : "asc"
+            var p = {
+                page: currentPage,
+                pageSize: currentPageSize,
+                start: currentStart,
+                sortColumn: "Role",
+                currOrder: currentSortOrder,
+                search: currentSearch
+            };
+            $.ajax({
+                url: "user/TableSize",
+                type: 'POST',
+                data: p,
+                success: function (result) {
+                    $('#userlistpartial').html(result);
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            });
+        });
+    });
+
+    @* search user *@
+        $(document).on("input", "#SearchItem", function () {
+            currentSearch = $(this).val();
+            var p = {
+                page: currentPage,
+                pageSize: currentPageSize,
+                start: currentStart,
+                sortColumn: currentSortColumn,
+                currOrder: currentSortOrder,
+                search: currentSearch
+            };
+            $.ajax({
+                url: "@Url.Action("TableSize", "User")",
+                type: 'POST',
+                data: p,
+                success: function (result) {
+                    $('#userlistpartial').html(result);
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            });
+        });
+
+
+    function GetId(element) {
+        $('#deleteuserid').val(element);
+    }
+</script>

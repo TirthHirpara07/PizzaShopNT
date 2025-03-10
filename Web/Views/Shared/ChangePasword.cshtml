@@ -1,0 +1,56 @@
+@model Entity.Bean.ChangePasswordBean;
+@{
+    ViewData["Title"] = "ChangePassword";
+    Layout = "_Layout";
+}
+<div class="col-md-6 mx-4">
+    <a class="text-decoration-none fs-2 fw-bolder">Change Password</a>
+</div>
+
+<div class="row ">
+    <div class="col-md-6 d-flex justify-content-center ">
+        <form asp-controller="dashboard" asp-action="ChangePassword">
+         
+                <div class=" p-2">
+                    <span>Enter a new Password to update your account crendentials</span>
+                </div>
+                <div class=" form-floating mt-4">
+                    <input type="password" asp-for="CurrentPassword" class="form-control " id="CurrentPassword"
+                        placeholder="Password">
+                    <label for="CurrentPassword">Password* </label>
+                    <img class="ImgInput" src="/images/icons/password not visible.svg"
+                        onclick="eyeToggle('CurrentPassword',this)" alt="" height="20" width="20">
+                    <span class="text-danger " asp-validation-for="CurrentPassword"></span>
+                </div>
+
+                <div class="form-floating mt-4 ">
+                    <input type="password" asp-for="NewPassword" class="form-control" id="NewPassword"
+                        placeholder="Password">
+                    <label for="NewPassword">New Password* </label>
+                    <img class="ImgInput" src="/images/icons/password not visible.svg"
+                        onclick="eyeToggle('NewPassword',this)" alt="" height="20" width="20">
+                </div>
+                <span class="text-danger" asp-validation-for="NewPassword"></span>
+
+                <div class="form-floating mt-4">
+                    <input type="password" asp-for="ConfirmPassword" class="form-control" id="ConfirmPassword"
+                        placeholder="Password">
+                    <label for="ConfirmPassword">Confirm Password* </label>
+                    <img class="ImgInput" src="/images/icons/password not visible.svg"
+                        onclick="eyeToggle('ConfirmPassword',this)" alt="" height="20" width="20">
+                    <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+                </div>
+
+                <div class="p-2 d-flex justify-content-start">
+                    <input type="submit" class="btn btn-primary mx-1" value="Update">
+                    <button class="btn bg-white text-primary border-primary"><a class="text-decoration-none"
+                            asp-controller="User" asp-action="index">Cancel</a></button>
+
+                </div>
+
+
+          
+        </form>
+    </div>
+
+</div>

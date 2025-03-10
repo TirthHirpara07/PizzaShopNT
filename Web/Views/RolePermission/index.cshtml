@@ -1,0 +1,30 @@
+@{
+  ViewData["Title"] = "Roles";
+  Layout = "_Layout";
+}
+<div class="row p-7">
+
+  <div class="col-md-8 m-5">
+    <div class="p-5 bg-white">
+      <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Role</th>
+          <td scope="col" align="right" class="fw-bold">Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var role in ViewBag.RoleName)
+        {
+          <tr>
+            <td>@role.Text</td>
+            <td align="right"><a asp-action="Permission" asp-controller="RolePermission" asp-route-role="@role.Text">
+              <img src="~/images/icons/editLogo.svg" alt="" height="20" width="20"></a>
+              </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>

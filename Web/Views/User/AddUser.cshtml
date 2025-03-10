@@ -1,0 +1,248 @@
+@model Entity.Bean.AddUserBean;
+@{
+    ViewData["Title"] = "User";
+    Layout = "_Layout";
+}
+
+<div class=" container-fluid px-4 px-md-5 py-4">
+    <div class="container-fluid">
+        <div class="    d-flex justify-content-between">
+            @* <span class="text-danger-emphasis">@ViewBag.validuser</span> *@
+            <div class="col-6">
+                <a class="text-decoration-none fs-2 fw-bolder">Add User</a>
+            </div>
+            <div class="col-6 pt-2  d-flex align-item-center justify-content-end" id="">
+                <div class="row">
+                    <button type="button" class="btn border border-primary text-primary ">
+                        <a class="page-link" asp-controller="user" asp-action="index" aria-label="Previous">
+                            <span aria-hidden="true">&laquo; Back</span>
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form asp-controller="user" asp-action="adduser" enctype="multipart/form-data">
+        <!-- inputs -->
+        <div class="col-12 p-0">
+            <div class="row my-4 shadow  bg-white p-2 ">
+                <div class="col-12 ">
+                    <div class=" row p-4">
+                        <div class=" col-12 col-md-6 p-2">
+                            <div class="form-floating ">
+                                <input type="text" asp-for="FirstName" class="form-control" id="AddUserFirstName"
+                                    placeholder="">
+                                <label for="AddUserFirstName">First Name</label>
+                                 <span class="text-danger " asp-validation-for="FirstName"></span>
+                            </div>
+                        </div>
+                        <div class=" col-12 col-md-6 p-2">
+                            <div class="form-floating ">
+                                <input type="text" asp-for="LastName" class="form-control" id="AddUserLastName"
+                                    placeholder="">
+                                <label for="AddUserLastName">Last Name</label>
+                                 <span class="text-danger " asp-validation-for="LastName"></span>
+                            </div>
+                        </div>
+                        <div class=" col-12 col-md-6 p-2">
+                            <div class="form-floating ">
+                                <input type="text" asp-for="Username" class="form-control" id="AddUserUserName"
+                                    placeholder="">
+                                <label for="AddUserUserName">User Name</label>
+                                 <span class="text-danger " asp-validation-for="Username"></span>
+                            </div>
+                        </div>
+                        <div class=" col-12 col-md-6 p-2">
+                            <div class="form-floating ">
+                                <select class="form-select" asp-for="Role" id="AddUserRole" placeholder=""
+                                    aria-label="Floating label select example">
+                                    <option selected value="">Select Role</option>
+                                    <option value="1">Admin</option>
+                                    <option value="3">Chef</option>
+                                    <option value="2">Account Manager</option>
+                                </select>
+                                <label for="AddUserRole">Role</label>
+                                 <span class="text-danger " asp-validation-for="Role"></span>
+                            </div>
+                        </div>
+                        <div class=" col-12 col-md-6 p-2">
+                            <div class="form-floating ">
+                                <input type="email" asp-for="Email" class="form-control" id="AddUserEmail"
+                                    placeholder="">
+                                <label for="AddUserEmail">Email</label>
+                                 <span class="text-danger " asp-validation-for="Email"></span>
+                            </div>
+                        </div>
+                        <div class=" col-12 col-md-6 p-2">
+                            <div class="form-floating ">
+                                <input type="password" asp-for="Password" class="form-control" id="AddUserPassword"
+                                    placeholder="">
+                                <label for="AddUserPassword">Password</label>
+                                 <span class="text-danger " asp-validation-for="Password"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Browse Files -->
+                <div class="col-12 ">
+                    <div class="row px-4 h-100">
+                        <div id="FileUpload"
+                            class="p-2 d-flex flex-column align-items-center justify-content-center col-12 ">
+                            <label for="FormFile" class=" bg-white my-2 mt-1" id="UploadLabel"><img
+                                    src="/images/icons/cloud-upload.svg" alt="" width="30" height="30">
+                            </label>
+                            <span class="my-2 mb-1">Browse Files</span>
+                            <div class="d-none">
+                                <input asp-for="UserImg" class="form-control d-none" type="file" id="FormFile">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="p-4">
+                                <img src="/images/icons/cloud-upload.svg" alt="" height="35" width="35">
+                           
+                            </div> -->
+                </div>
+                <!-- other input -->
+                <div class="col-12">
+                    <div class="row p-4">
+                        <div class="col-12 col-md-6 col-lg-4 p-2">
+                            <div class="form-floating">
+                                <select class="form-control" id="AddUserCountry" placeholder=""
+                                    asp-items="@ViewBag.CountryName" asp-for="Country">
+                                    <option value="" selected>Please Select Country</option>
+                                </select>
+                                <label for="AddUserCountry">Country</label>
+                                 <span class="text-danger " asp-validation-for="Country"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 p-2">
+                            <div class="form-floating">
+                                <select class="form-control" id="AddUserState" placeholder=""
+                                    asp-items="@ViewBag.StateName" asp-for="State">
+                                </select>
+                                <label for="AddUserState">State</label>
+                                 <span class="text-danger " asp-validation-for="State"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 p-2">
+                            <div class="form-floating">
+                                <select class="form-control" id="AddUserCity" placeholder=""
+                                    asp-items="@ViewBag.CityName" asp-for="City">
+                                </select>
+                                <label for="AddUserRole">City</label>
+                                 <span class="text-danger " asp-validation-for="City"></span>
+                            </div>
+                        </div>
+                        <div class=" col-12 col-md-6 col-lg-4 p-2">
+                            <div class="form-floating">
+                                <input type="text" asp-for="ZipCode" class="form-control" id="AddUserZipcode"
+                                    placeholder="">
+                                <label for="AddUserZipcode">Zipcode</label>
+                                 <span class="text-danger " asp-validation-for="ZipCode"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 p-2">
+                            <div class="form-floating">
+                                <input type="text" asp-for="Address" class="form-control" id="AddUserAddrerss"
+                                    placeholder="">
+                                <label for="AddUserAddrerss">Address</label>
+                                 <span class="text-danger " asp-validation-for="Address"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 p-2">
+                            <div class="form-floating">
+                                <input type="text" asp-for="PhoneNo" class="form-control" id="AddUserPhone"
+                                    placeholder="">
+                                <label for="AddUserPhone">Phone</label>
+                                 <span class="text-danger " asp-validation-for="PhoneNo"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class=" p-4">
+                        <button type="submit" class="btn btn-primary border border-primary text-white">
+                            Create New User
+                        </button>
+                        <input type="reset" class="btn border border-primary text-primary" value="Cancel">
+                    </div>
+                </div>
+            </div>
+    </form>
+</div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var ddlState = $('#AddUserState');
+         var ddlDistrict = $('#AddUserCity');
+        ddlState.empty(); // Clear the please wait
+        ddlState.append($("<option></option>").val('').html('Select State'));
+        ddlDistrict.empty(); // Clear the please wait
+        ddlDistrict.append($("<option></option>").val('').html('Select City Name'));
+        var Countriesdd = $("#AddUserCountry");
+        @* Countriesdd.append($("<option></option>").val('').html('Please Select Country')); *@
+            $("#AddUserCountry").change(function () {
+
+                //alert("On ddlCountry change");
+                var CountryId = parseInt($(this).val());
+                console.log(CountryId);
+                if (!isNaN(CountryId)) {
+
+                    ddlState.empty();
+                    ddlState.append($("<option></option>").val('').html('Please wait ...'));
+                    var ddlDistrict = $('#AddUserCity');
+                    $.ajax({
+                        url: "/Dashboard/GetStates",
+                        type: 'GET',
+                        dataType: 'json',
+                        data: { CountryId: CountryId },
+                        success: function (d) {
+
+                            ddlState.empty(); // Clear the please wait
+                            ddlState.append($("<option></option>").val('').html('Select State'));
+                            ddlDistrict.empty(); // Clear the please wait
+                            ddlDistrict.append($("<option></option>").val('').html('Select City Name'));
+                            $.each(d, function (i, states) {
+                                ddlState.append($("<option></option>").val(states.id).html(states.name));
+                            });
+                        },
+                        error: function () {
+                            alert('Error!');
+                        }
+                    });
+                }
+
+
+            });
+
+        $("#AddUserState").change(function () {
+            var StateId = parseInt($(this).val());
+            if (!isNaN(StateId)) {
+               
+                ddlDistrict.append($("<option></option>").val('').html('Please wait ...'));
+                $.ajax({
+                    url: "/Dashboard/GetCities",
+                    type: 'GET',
+                    dataType: 'json',
+                    data: { stateId: StateId },
+                    success: function (d) {
+
+
+                        ddlDistrict.empty(); // Clear the plese wait
+                        ddlDistrict.append($("<option></option>").val('').html('Select City Name'));
+                        $.each(d, function (i, districts) {
+                            ddlDistrict.append($("<option></option>").val(districts.id).html(districts.name));
+                        });
+                    },
+                    error: function () {
+                        alert('Error!');
+                    }
+                });
+            }
+
+
+        });
+    });
+</script>

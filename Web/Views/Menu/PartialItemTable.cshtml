@@ -1,0 +1,136 @@
+@using Entity.Helper
+@using Entity.ViewModal
+@model Entity.Helper.MenuServiceModel
+@{
+    var pageContent = ViewBag.pageContent as ItemPagination;
+}
+
+<div class="col-12 table-responsive">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"> <input type="checkbox" name="MenuItemsName" id="" class="mx-2"> Name</th>
+                <th scope="col">Item Type</th>
+                <th scope="col">Rate</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Available</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                for (int i = 0; i < Model.ItemList.Count; i++)
+                {
+
+
+                    <tr>
+                        <td class="d-flex ">
+                            <div>
+                                <input type="checkbox" class="mx-2">
+                            </div>
+                            <div>
+                                <img src="~/images/@Model.ItemList[i].ItemImg" alt="" height="30" width="30">
+                            </div>
+                            <div>
+                                <span>@Model.ItemList[i].Name</span>
+                            </div>
+                        </td>
+                        <td> @if(Model.ItemList[i].ItemType == ItemType.Veg)
+                            {
+                                <img src="~/images/icons/veg-icon.svg" alt="" height="20" width="30">
+                            }
+                            else
+                            {
+                                <img src="~/images/icons/non-veg-icon.svg" alt="" height="20" width="30">
+                            }
+                        </td>
+                        <td>@Model.ItemList[i].Rate</td>
+                        <td>@Model.ItemList[i].Quantity</td>
+                        <td>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" asp-for="@Model.ItemList[i].Available">
+                                <label class="form-check-label" for=""></label>
+                            </div>
+                        </td>
+                        <td>
+                            <img class="m-2" src="/images/icons/editLogo.svg" alt="" height="25" width="25"
+                                data-bs-toggle="modal" data-bs-target="#EditItemModal">
+                            <img class="m-2" src="/images/icons/deleteIcon.svg" alt="" height="25" width="25"
+                                data-bs-toggle="modal" data-bs-target="#DeleteModal">
+                        </td>
+
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+@* pagination *@
+<div class="d-flex align-item-center justify-content-end table-responsive">
+    <div class="my-2 mx-1 d-flex">
+        <span class="m-2">Items per Pages</span>
+
+        <select class="h-50  px-3 m-2" aria-label=".form-select-sm example" id="itemperpage">
+            <option value="1" selected="@( pageContent.pageSize ==1 ? "selected" : null )">1</option>
+            <option value="2" selected="@( pageContent.pageSize ==2 ? "selected" : null )">2</option>
+            <option value="3" selected="@( pageContent.pageSize ==3 ? "selected" : null )">3</option>
+            <option value="4" selected="@( pageContent.pageSize ==4 ? "selected" : null )">4</option>
+            <option value="5" selected="@( pageContent.pageSize ==5 ? "selected" : null )">5</option>
+            <option value="6" selected="@( pageContent.pageSize ==6 ? "selected" : null )">6</option>
+            <option value="7" selected="@( pageContent.pageSize ==7 ? "selected" : null )">7</option>
+            <option value="8" selected="@( pageContent.pageSize ==8 ? "selected" : null )">8</option>
+        </select>
+        <span class="m-2">Showing @pageContent.start-@pageContent.end of @pageContent.count</span>
+        <ul class="pagination">
+            <li class="page-item">
+                @if (pageContent.page > 0)
+                {
+
+                    <a class="page-link PreviousButton" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+
+                }
+                else
+                {
+
+                    <a class="page-link PreviousButton disabled" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+
+                }
+            </li>
+            <li class="page-item">
+                @if (pageContent.page >= pageContent.maxPage - 1)
+                {
+
+                    <a class="page-link NextButton disabled" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+
+                }
+                else
+                {
+
+                    <a class="page-link NextButton" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+
+                }
+
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<script>
+    var currentPage =@ViewBag.pageContent.page;
+    var currentPageSize = @ViewBag.pageContent.pageSize;
+    var currentStart =  @ViewBag.pageContent.start;
+    var currentSearch = "@ViewBag.pageContent.search";
+    var currentCount = @ViewBag.pageContent.count;
+    var currentSection = "@ViewBag.pageContent.Currentsection";
+    var categoryid =@ViewBag.pageContent.Category;
+</script>

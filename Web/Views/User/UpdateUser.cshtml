@@ -1,0 +1,231 @@
+@model Entity.Bean.EditUserBean;
+@{
+    ViewData["Title"] = "User";
+    Layout = "_Layout";
+}
+
+<div class=" container-fluid px-4 px-md-5 py-4">
+    <div class="container-fluid">
+        <div class="    d-flex justify-content-between">
+            <div class="col-6">
+                <a class="text-decoration-none fs-2 fw-bolder">Edit User</a>
+            </div>
+            <div class="col-6 pt-2  d-flex align-item-center justify-content-end" id="">
+                <div class="row">
+                    <button type="button" class="btn border border-primary text-primary ">
+                        <a class="page-link"asp-controller="user" asp-action="index" aria-label="Previous">
+                            <span aria-hidden="true">&laquo; Back</span>
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form asp-controller="user" asp-action="Updateuser" enctype="multipart/form-data">
+        <!-- inputs -->
+        <div class="col-12 p-0">
+            <div class="row my-4 shadow  bg-white p-2 ">
+                <div class="col-12 ">
+                    <div class=" row p-4">
+                        <div class=" col-12 col-md-6 p-2">
+                            <div class="form-floating ">
+                                <input type="text" asp-for="FirstName" value="@ViewBag.PreEdit.FirstName" class="form-control" id="EditUserFirstName"
+                                    placeholder="">
+                                <label for="EditUserFirstName">First Name</label>
+                                 <span class="text-danger " asp-validation-for="FirstName"></span>
+                            </div>
+                        </div>
+                        <div class=" col-12 col-md-6 p-2">
+                            <div class="form-floating ">
+                                <input type="text" asp-for="LastName" value="@ViewBag.PreEdit.LastName" class="form-control" id="EditUserLastName"
+                                    placeholder="">
+                                <label for="EditUserLastName">Last Name</label>
+                                <span class="text-danger " asp-validation-for="LastName"></span>
+                            </div>
+                        </div>
+                        <div class=" col-12 col-md-6 p-2">
+                            <div class="form-floating ">
+                                <input type="text" asp-for="Username" value="@ViewBag.PreEdit.Username" class="form-control" id="EditUserUserName"
+                                    placeholder="">
+                                <label for="EditUserUserName">User Name</label>
+                                <span class="text-danger " asp-validation-for="Username"></span>
+                            </div>
+                        </div>
+                        <div class=" col-12 col-md-6 p-2">
+                            <div class="form-floating ">
+                                <select class="form-select" asp-for="Role" asp-items="@ViewBag.RoleName" value="@ViewBag.currRole" id="EditUserRole" placeholder=""
+                                    aria-label="Floating label select example">
+                                </select>
+                                <label for="EditUserRole">Role</label>
+                                <span class="text-danger " asp-validation-for="Role"></span>
+                            </div>
+                        </div>
+                        <div class=" col-12 col-md-6 p-2">
+                            <div class="form-floating ">
+                                <input type="email" asp-for="Email" value="@ViewBag.PreEdit.Email" class="form-control "  id="EditUserEmail"
+                                    placeholder="" readonly>
+                                <label for="EditUserEmail">Email</label>
+                                <span class="text-danger " asp-validation-for="Email"></span>
+                            </div>
+                        </div>
+                        <div class=" col-12 col-md-6 p-2">
+                           <div class="form-floating ">
+                                <select class="form-select" asp-for="Status" value="" id="EditUserStatus" placeholder=""
+                                    aria-label="Floating label select example">
+                                    <option value="true" selected="@(ViewBag.PreEdit.Status == true)">Active</option>
+                                    <option value="false" selected="@(ViewBag.PreEdit.Status == false)">InActive</option>
+                                </select>
+                                <label for="EditUserStatus">Status</label>
+                                <span class="text-danger " asp-validation-for="Status"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Browse Files -->
+                <div class="col-12 ">
+                    <div class="row px-4 h-100">
+                        <div id="FileUpload"
+                            class="p-2 d-flex flex-column align-items-center justify-content-center col-12 ">
+                            <label for="FormFile" class=" bg-white my-2 mt-1" id="UploadLabel"><img
+                                    src="/images/icons/cloud-upload.svg" alt="" width="30" height="30">
+                            </label>
+                            <span class="my-2 mb-1">Browse Files</span>
+                            <div class="d-none">
+                                <input asp-for="NewUserImg" class="form-control d-none" type="file" id="FormFile">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- other input -->
+                <div class="col-12">
+                    <div class="row p-4">
+                        <div class="col-12 col-md-6 col-lg-4 p-2">
+                            <div class="form-floating">
+                                <select class="form-control" id="EditUserCountry" placeholder=""
+                                    asp-items="@ViewBag.CountryName" asp-for="Country">
+                                </select>
+                                <label for="EditUserCountry">Country</label>
+                                <span class="text-danger " asp-validation-for="Country"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 p-2">
+                            <div class="form-floating">
+                                <select class="form-control" id="EditUserState" placeholder="" asp-items="@ViewBag.StateName" asp-for="State">
+                                </select>
+                                <label for="EditUserState">State</label>
+                                <span class="text-danger " asp-validation-for="State"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 p-2">
+                            <div class="form-floating">
+                                <select class="form-control" id="EditUserCity" placeholder=""
+                                    asp-items="@ViewBag.CityName" asp-for="City">
+                                </select>
+                                <label for="EditUserRole">City</label>
+                                <span class="text-danger " asp-validation-for="City"></span>
+                            </div>
+                        </div>
+                        <div class=" col-12 col-md-6 col-lg-4 p-2">
+                            <div class="form-floating">
+                                <input type="text" asp-for="ZipCode" value="@ViewBag.PreEdit.ZipCode" class="form-control" id="EditUserZipcode" placeholder="">
+                                <label for="EditUserZipcode">Zipcode</label>
+                                <span class="text-danger " asp-validation-for="ZipCode"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 p-2">
+                            <div class="form-floating">
+                                <input type="text" asp-for="Address" value="@ViewBag.PreEdit.Address" class="form-control" id="EditUserAddress" placeholder="">
+                                <label for="EditUserAddress">Address</label>
+                                <span class="text-danger " asp-validation-for="Address"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 p-2">
+                            <div class="form-floating">
+                                <input type="text" asp-for="PhoneNo" value="@ViewBag.PreEdit.PhoneNo" class="form-control" id="EditUserPhone" placeholder="">
+                                <label for="EditUserPhone">Phone</label>
+                                <span class="text-danger " asp-validation-for="PhoneNo"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class=" p-4">
+                        <button type="submit" class="btn btn-primary border border-primary text-white">
+                            Update User
+                        </button>
+                        <input type="reset" class="btn border border-primary text-primary" value="Cancel">
+                    </div>
+                </div>
+            </div>
+    </form>
+</div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var Countriesdd = $("#EditUserCountry");
+            $("#EditUserCountry").change(function () {
+                var CountryId = parseInt($(this).val());
+                console.log(CountryId);
+                if (!isNaN(CountryId)) {
+                    var ddlState = $('#EditUserState');
+                    ddlState.empty();
+                    ddlState.append($("<option></option>").val('').html('Please wait ...'));
+                    var ddlDistrict = $('#EditUserCity');
+
+                    $.ajax({
+                        url: "/Dashboard/GetStates",
+                        type: 'GET',
+                        dataType: 'json',
+                        data: { CountryId: CountryId },
+                        success: function (d) {
+
+                            ddlState.empty(); // Clear the please wait
+                            ddlState.append($("<option></option>").val('').html('Select State'));
+                            ddlDistrict.empty(); // Clear the please wait
+                        ddlDistrict.append($("<option></option>").val('').html('Select City Name'));
+                            $.each(d, function (i, states) {
+                                ddlState.append($("<option></option>").val(states.id).html(states.name));
+                            });
+                        },
+                        error: function () {
+                            alert('Error!');
+                        }
+                    });
+                }
+
+
+            });
+
+        $("#EditUserState").change(function () {
+            var StateId = parseInt($(this).val());
+            if (!isNaN(StateId)) {
+                var ddlDistrict = $('#EditUserCity');
+                ddlDistrict.append($("<option></option>").val('').html('Please wait ...'));
+                $.ajax({
+                    url: "/dashboard/GetCities",
+                    type: 'GET',
+                    dataType: 'json',
+                    data: { stateId: StateId },
+                    success: function (d) {
+
+
+                        ddlDistrict.empty(); // Clear the plese wait
+                        ddlDistrict.append($("<option></option>").val('').html('Select City Name'));
+                        $.each(d, function (i, districts) {
+                            ddlDistrict.append($("<option></option>").val(districts.id).html(districts.name));
+                        });
+                    },
+                    error: function () {
+                        alert('Error!');
+                    }
+                });
+            }
+
+
+        });
+
+
+    });
+</script>
