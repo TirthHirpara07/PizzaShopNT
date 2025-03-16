@@ -1,3 +1,4 @@
+@using AspNetCoreHero.ToastNotification.Notyf
 @{
     ViewData["Title"] = "Menu";
     Layout = "_Layout";
@@ -16,15 +17,16 @@
                 <div class="col-12 d-flex">
                     <div class="m-1 p-2 border-bottom border-primary">
                         <div class="ItemSection">
-                        <img src="/images/icons/icons8-list.svg" alt="" height="20" width="20">
-                        <span class="text-primary">Items</span>
+                            <img src="/images/icons/icons8-list.svg" alt="" height="20" width="20">
+                            <span class="text-primary">Items</span>
                         </div>
                     </div>
                     <div class="m-1 p-2">
-                        <div class="ModifierSection">
-                        <img src="/images/icons/category-svgrepo-com.svg" alt="" height="20" width="20">
-                        <span class="text-primary">Modifiers</span>
-                    </div>
+                        <div>
+                            <img src="/images/icons/category-svgrepo-com.svg" class="ModifierSection" alt="" height="20"
+                                width="20">
+                            <span class="text-primary">Modifiers</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -34,25 +36,35 @@
         </div>
     </div>
 </div>
-
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+    @* declaring gloabal variables *@
+     var ModifiersOfCurrentModifierGroup = [];
+      var CurrentModifierGroupId = 0;
+    var deletedmodifierlist = [];
+    var addedmodifierlist = [];
+    
     $(document).ready(function () {
-        $(".ModifierSection").on("click",function(){
+        $(document).on("click", ".ModifierSection", function () {
             var ps = {
                 currentSection: "modifier",
-            }; 
+            };
             $.ajax({
-                    url: "@Url.Action("ModifierPartialView", "Menu")",
-                    type: 'POST',
-                    data: ps,
-                    success: function (result) {
-                        $('#MenuContainer').html(result);
+                url: "@Url.Action("ModifierPartialView", "Menu")",
+                type: 'POST',
+                data: ps,
+                success: function (result) {
 
-                    },
-                    error: function (error) {
-                        console.log(error, "error")
-                    }
-                });
+                    $('#MenuContainer').empty();
+                    $('#MenuContainer').html(result);
+
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            });
         });
+        
     });
 </script>

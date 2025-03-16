@@ -6251,11 +6251,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "B:\\Code\\TatvaSoft\\Work From Home\\PizzaShopNT\\Service\\Service.csproj",
+      "projectUniqueName": "b:\\Code\\TatvaSoft\\PizzaShopNT\\Service\\Service.csproj",
       "projectName": "Service",
-      "projectPath": "B:\\Code\\TatvaSoft\\Work From Home\\PizzaShopNT\\Service\\Service.csproj",
+      "projectPath": "b:\\Code\\TatvaSoft\\PizzaShopNT\\Service\\Service.csproj",
       "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "B:\\Code\\TatvaSoft\\Work From Home\\PizzaShopNT\\Service\\obj\\",
+      "outputPath": "b:\\Code\\TatvaSoft\\PizzaShopNT\\Service\\obj\\",
       "projectStyle": "PackageReference",
       "centralPackageVersionsManagementEnabled": true,
       "configFilePaths": [
@@ -6274,11 +6274,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "B:\\Code\\TatvaSoft\\Work From Home\\PizzaShopNT\\Entity\\Entity.csproj": {
-              "projectPath": "B:\\Code\\TatvaSoft\\Work From Home\\PizzaShopNT\\Entity\\Entity.csproj"
+            "B:\\Code\\TatvaSoft\\PizzaShopNT\\Entity\\Entity.csproj": {
+              "projectPath": "B:\\Code\\TatvaSoft\\PizzaShopNT\\Entity\\Entity.csproj"
             },
-            "B:\\Code\\TatvaSoft\\Work From Home\\PizzaShopNT\\Repository\\Repository.csproj": {
-              "projectPath": "B:\\Code\\TatvaSoft\\Work From Home\\PizzaShopNT\\Repository\\Repository.csproj"
+            "b:\\Code\\TatvaSoft\\PizzaShopNT\\Repository\\Repository.csproj": {
+              "projectPath": "b:\\Code\\TatvaSoft\\PizzaShopNT\\Repository\\Repository.csproj"
             }
           }
         }

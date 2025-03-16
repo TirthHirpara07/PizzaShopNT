@@ -5715,11 +5715,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "B:\\Code\\TatvaSoft\\Work From Home\\PizzaShopNT\\Entity\\Entity.csproj",
+      "projectUniqueName": "B:\\Code\\TatvaSoft\\PizzaShopNT\\Entity\\Entity.csproj",
       "projectName": "Entity",
-      "projectPath": "B:\\Code\\TatvaSoft\\Work From Home\\PizzaShopNT\\Entity\\Entity.csproj",
+      "projectPath": "B:\\Code\\TatvaSoft\\PizzaShopNT\\Entity\\Entity.csproj",
       "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "B:\\Code\\TatvaSoft\\Work From Home\\PizzaShopNT\\Entity\\obj\\",
+      "outputPath": "B:\\Code\\TatvaSoft\\PizzaShopNT\\Entity\\obj\\",
       "projectStyle": "PackageReference",
       "centralPackageVersionsManagementEnabled": true,
       "configFilePaths": [

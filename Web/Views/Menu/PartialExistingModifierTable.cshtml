@@ -1,0 +1,117 @@
+@using Entity.Helper
+@model Entity.Helper.MenuServiceModel
+@{
+    var pageContent = ViewBag.pageContentExisting as ItemPagination;
+}
+
+<div class="col-12 table-responsive">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"> <input type="checkbox" name="MenuItemsName" id="AllModifiersSelect" class="mx-2">
+                    <label for="AllModifiersSelect"></label>
+                </th>
+                <th scope="col">Name</th>
+                <th scope="col">Unit</th>
+                <th scope="col">Rate</th>
+                <th scope="col">Quantity</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                for (int i = 0; i < Model.ModifierList.Count; i++)
+                {
+                        var modifier = Model.ModifierList[i];
+                    <tr>
+                        <td >
+                            <div class="d-flex ">
+                                <input type="checkbox" class="mx-2 existing-modifier-checkbox" data-modifier='@Html.Raw(Json.Serialize(modifier))' id="@Model.ModifierList[i].Id" value="@Model.ModifierList[i].Id">
+                                <label for="@Model.ModifierList[i].Id"></label> 
+                            </div>
+                        </td>
+                        <td>@Model.ModifierList[i].Name</td>
+                        <td>@Model.ModifierList[i].Unit</td>
+                        <td>@Model.ModifierList[i].Rate</td>
+                        <td>@Model.ModifierList[i].Quantity</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+@* pagination *@
+<div class="d-flex align-item-center justify-content-end table-responsive">
+    <div class="my-2 mx-1 d-flex">
+        <span class="m-2">Items per Pages</span>
+
+        <select class="h-50  px-3 m-2" aria-label=".form-select-sm example" id="itemperpageExistingModifier">
+            <option value="1" selected="@( pageContent.pageSize ==1 ? "selected" : null )">1</option>
+            <option value="2" selected="@( pageContent.pageSize ==2 ? "selected" : null )">2</option>
+            <option value="3" selected="@( pageContent.pageSize ==3 ? "selected" : null )">3</option>
+            <option value="4" selected="@( pageContent.pageSize ==4 ? "selected" : null )">4</option>
+            <option value="5" selected="@( pageContent.pageSize ==5 ? "selected" : null )">5</option>
+            <option value="6" selected="@( pageContent.pageSize ==6 ? "selected" : null )">6</option>
+            <option value="7" selected="@( pageContent.pageSize ==7 ? "selected" : null )">7</option>
+            <option value="8" selected="@( pageContent.pageSize ==8 ? "selected" : null )">8</option>
+        </select>
+        <span class="m-2">Showing @pageContent.start-@pageContent.end of @pageContent.count</span>
+        <ul class="pagination">
+            <li class="page-item">
+                @if (pageContent.page > 0)
+                {
+
+                    <a class="page-link PreviousButtonExistingModifier" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+
+                }
+                else
+                {
+
+                    <a class="page-link PreviousButtonExistingModifier disabled" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+
+                }
+            </li>
+            <li class="page-item">
+                @if (pageContent.page >= pageContent.maxPage - 1)
+                {
+
+                    <a class="page-link NextButtonExistingModifier disabled" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+
+                }
+                else
+                {
+
+                    <a class="page-link NextButtonExistingModifier" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+
+                }
+
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+    var ExistingcurrentPage = @ViewBag.pageContentExisting.page;
+    var ExistingcurrentPageSize = @ViewBag.pageContentExisting.pageSize;
+    var ExistingcurrentStart =  @ViewBag.pageContentExisting.start;
+    var ExistingcurrentSearch = "@ViewBag.pageContentExisting.search";
+    var ExistingcurrentCount = @ViewBag.pageContentExisting.count;
+    var ExistingcurrentSection = "@ViewBag.pageContentExisting.Currentsection";
+    var Existingcategoryid = 0;
+</script>

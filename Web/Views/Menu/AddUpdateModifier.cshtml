@@ -1,0 +1,151 @@
+@model Entity.ViewModal.ShowModifier
+<!-- Add Modifier modal -->
+<div class="modal fade" id="AddModifierModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form asp-action="UpdateModifier"  asp-controller="Menu" id="AddModifierForm">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Modifier</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex  align-items-center justify-content-center">
+                    <div class="row m-2">
+                        <input type="number" asp-for="Id" hidden>
+                        <div class="col-md-6 mb-4">
+                            <div class="form-floating ">
+                                <select class="form-select" id="AddModifierGroup" placeholder=""
+                                    aria-label="Floating label select example" value="@Model.ModifierGroupId" asp-items="@ViewBag.ModifierGroups" asp-for="ModifierGroupId">
+                                    <option selected value="">Select Modifier Group</option>
+                                </select>
+                                <label for="AddUserRole">Select Modifier Group</label>
+                                <span class="text-danger " asp-validation-for="ModifierGroupId"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="form-floating ">
+                                <input type="text" asp-for="Name" value="@Model.Name" class="form-control" id="AddModifierName" placeholder="">
+                                <label for="AddModifierName">Name</label>
+                                <span class="text-danger " asp-validation-for="Name"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="form-floating ">
+                                <input type="text" asp-for="Rate" class="form-control" id="AddModifierRate" placeholder="">
+                                <label for="AddModifierRate">Rate</label>
+                                <span class="text-danger "asp-validation-for="Rate"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="form-floating ">
+                                <input type="text" asp-for="Quantity" class="form-control" id="AddModifierQuantity" placeholder="">
+                                <label for="AddModifierQuantity" >Quantity</label>
+                                <span class="text-danger " asp-validation-for="Quantity"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="form-floating ">
+                                <select class="form-select" id="AddModifierUnit" placeholder=""
+                                    aria-label="Floating label select example" asp-for="Unit">
+                                    <option selected value="">Select Unit</option>
+                                    <option  value="piece">Pieces</option>
+                                    <option  value="gram">Grams</option>
+                                    <option  value="ml">Mililiters</option>
+                                </select>
+                                <label for="AddModifierUnit">Unit*</label>
+                                <span class="text-danger " asp-validation-for="Unit"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <div class="form-floating ">
+                                <input type="text" asp-for="Description" class="form-control" id="AddModifierDescription" placeholder="">
+                                <label for="AddModifierDescription">Description</label>
+                                <span class="text-danger " asp-validation-for="Description"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer d-flex align-item-center justify-content-end">
+                    <button type="submit" form="AddModifierForm" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit Modifier modal -->
+<div class="modal fade" id="UpdateModifierModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form asp-action="UpdateModifier"  asp-controller="Menu" id="UpdateModifierForm">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Modifier</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex  align-items-center justify-content-center">
+                    <div class="row m-2">
+                        <input type="number" asp-for="Id" hidden>
+                        <div class="col-md-6 mb-4">
+                            <div class="form-floating ">
+                                <select class="form-select" id="UpdateModifierGroup" placeholder=""
+                                    aria-label="Floating label select example" value="@Model.ModifierGroupId" asp-items="@ViewBag.ModifierGroups" asp-for="ModifierGroupId">
+                                    <option selected value="">Select Modifier Group</option>
+                                </select>
+                                <label for="UpdateModifierGroup">Select Modifier Group</label>
+                                <span class="text-danger " asp-validation-for="ModifierGroupId"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="form-floating ">
+                                <input type="text" asp-for="Name" value="@Model.Name" class="form-control" id="UpdateModifierName" placeholder="">
+                                <label for="UpdateModifierName">Name</label>
+                                <span class="text-danger " asp-validation-for="Name"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="form-floating ">
+                                <input type="text" asp-for="Rate" class="form-control" id="UpdateModifierRate" placeholder="">
+                                <label for="UpdateModifierRate">Rate</label>
+                                <span class="text-danger "asp-validation-for="Rate"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="form-floating ">
+                                <input type="text" asp-for="Quantity" class="form-control" id="UpdateModifierQuantity" placeholder="">
+                                <label for="UpdateModifierQuantity" >Quantity</label>
+                                <span class="text-danger " asp-validation-for="Quantity"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="form-floating ">
+                                <select class="form-select" id="UpdateModifierUnit" placeholder=""
+                                    aria-label="Floating label select example" asp-for="Unit">
+                                    <option selected value="">Select Unit</option>
+                                    <option  value="piece">Pieces</option>
+                                    <option  value="gram">Grams</option>
+                                    <option  value="ml">Mililiters</option>
+                                </select>
+                                <label for="UpdateModifierUnit">Unit*</label>
+                                <span class="text-danger " asp-validation-for="Unit"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <div class="form-floating ">
+                                <input type="text" asp-for="Description" class="form-control" id="UpdateModifierDescription" placeholder="">
+                                <label for="UpdateModifierDescription">Description</label>
+                                <span class="text-danger " asp-validation-for="Description"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer d-flex align-item-center justify-content-end">
+                    <button type="submit" form="UpdateModifierForm" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -35,8 +35,6 @@ public partial class User
 
     public virtual Useraddress? Address { get; set; }
 
-    public virtual ICollection<Department> Departments { get; set; } = new List<Department>();
-
     public virtual Role? Role { get; set; }
 
     public virtual ICollection<Useraddress> UseraddressCreatedbyNavigations { get; set; } = new List<Useraddress>();

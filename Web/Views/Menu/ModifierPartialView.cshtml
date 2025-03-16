@@ -2,8 +2,10 @@
     <div class="row">
         <div class="col-12 col-md-3 " style="background-color: #f6f6f6;">
             @* partialviewformodifiergroup *@
-            <partial name="ParialModifierGroup.cshtml" />
+            <partial name="PartialModifierGroup.cshtml" />
         </div>
+
+
         <div class="col-12 col-md-9">
 
             <div class="col-6">
@@ -12,21 +14,20 @@
             <div class="col-12">
                 <div class="row  d-flex align-item-center justify-content-end">
                     <div class="col-6  d-flex justify-content-end ">
-                        <input type="search" class=" mx-2  d-sm-block form-control SearchItem" placeholder="Search">
+                        <input type="search" class=" mx-2  d-sm-block form-control SearchItemModifier"
+                            placeholder="Search">
                         <div class="border border-primary rounded d-flex justify-content-center mx-2">
-                            <img src="/images/icons/deleteIcon.svg" alt="" height="30" width="30">
+                            <img src="/images/icons/deleteIcon.svg" alt="" height="30" width="30"  data-bs-toggle="modal" data-bs-target="#MultipleDeleteModal">
                         </div>
-                        <button type="button" class="btn btn-primary  text-white mx-2 w-50">
-                            <a class="page-link" href="#" aria-label="AddItem">
-                                <span aria-hidden="true">+ New Modifier</span>
-                            </a>
+                        <button type="button" class="btn btn-primary  text-white mx-2 w-50" id="AddNewModifier">
+                            <span aria-hidden="true">+ New Modifier</span>
                         </button>
 
                     </div>
                 </div>
             </div>
+            <div class="AddUpdateModals"></div>
             <div class="ShowTable">
-
                 @* partialviewforitemstable *@
                 <partial name="PartialModifierTable.cshtml" />
             </div>
@@ -37,8 +38,8 @@
 
 <!-- Button trigger modal -->
 <!-- Modal -->
-<!-- delete modal -->
-<div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+<!--Multiple delete modal -->
+<div class="modal fade" id="MultipleDeleteModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -47,11 +48,11 @@
             </div>
             <div class="modal-body d-flex  align-item-center justify-content-center">
                 <img src="/images/icons/alertIcon.svg" alt="" height="30" width="30">
-                <span>Are you sure you want to delete</span>
+                <span>Are you sure you want to delete these Modifiers</span>
             </div>
             <div class="modal-footer d-flex align-item-center justify-content-center">
-                <button type="button" class="btn btn-primary">Yes</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="MultipleDeleteModifier">Yes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="CancelMultipleDelete()">No</button>
             </div>
         </div>
     </div>
@@ -59,20 +60,191 @@
 
 
 
-
-<div class="modal fade" id="EditItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-            <div class="modal-body ">
-                @* partial view for edit modal *@
-            </div>
-        </div>
-    </div>
-</div>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
+    var selectedExistingModifiers = [];
+    var selectedModifiers = [];
+    $(document).on("change", "#AllModifiersSelect", function () {
+        $(".existing-modifier-checkbox:visible").prop("checked", this.checked);
+        $(".existing-modifier-checkbox:visible").each(function () {
+            const modifierData = JSON.parse($(this).attr("data-modifier"));
+            if (this.checked && !selectedExistingModifiers.some(mod => mod.id === modifierData.id)) {
+                selectedExistingModifiers.push(modifierData);
+            } else if (!this.checked) {
+                selectedExistingModifiers = selectedExistingModifiers.filter(item => item.id !== modifierData.id);
+            }
+        });
+    });
+
+    // Track individual checkbox changes
+    $(document).on("change", ".existing-modifier-checkbox", function () {
+        const modifierData = JSON.parse($(this).attr("data-modifier"));
+
+        if ($(this).is(":checked")) {
+            if (!selectedExistingModifiers.some(mod => mod.id === modifierData.id)) {
+                selectedExistingModifiers.push(modifierData);
+            }
+        } else {
+            selectedExistingModifiers = selectedExistingModifiers.filter(item => item.id !== modifierData.id);
+        }
+        console.log(selectedExistingModifiers)
+        updateSelectAllModifiers();
+    });
+
+
+    // Ensure 'Select All' reflects individual selections
+    function updateSelectAllModifiers() {
+        const allChecked = $(".existing-modifier-checkbox:visible").length === $(".existing-modifier-checkbox:visible:checked").length;
+        $("#AllModifiersSelect").prop("checked", allChecked);
+    }
+
+    // Restore checkbox states after pagination
+    function restoreExistingCheckboxes() {
+        $(".existing-modifier-checkbox").each(function () {
+            const modifierData = JSON.parse($(this).attr("data-modifier"));
+            if (selectedExistingModifiers.some(mod => mod.id === modifierData.id)) {
+                $(this).prop("checked", true);
+            }
+        });
+    }
+
+    function RestoreExistingModifierList() {
+        selectedExistingModifiers = [];
+        selectedExistingModifiers = ModifiersOfCurrentModifierGroup.map(mod => ({ ...mod }));
+        restoreExistingCheckboxes();
+    }
+
+
+//Modifier checkbox in Modifier table
+$(document).on("change", "#AllModifiersSelect", function () {
+        $(".modifier-checkbox:visible").prop("checked", this.checked);
+        $(".modifier-checkbox:visible").each(function () {
+            const modifierData = JSON.parse($(this).attr("data-modifier"));
+            if (this.checked && !selectedModifiers.some(mod => mod.id === modifierData.id)) {
+                selectedModifiers.push(modifierData);
+            } else if (!this.checked) {
+                selectedModifiers = selectedModifiers.filter(item => item.id !== modifierData.id);
+            }
+        });
+    });
+
+    // Track individual checkbox changes
+    $(document).on("change", ".modifier-checkbox", function () {
+        const modifierData = JSON.parse($(this).attr("data-modifier"));
+
+        if ($(this).is(":checked")) {
+            if (!selectedModifiers.some(mod => mod.id === modifierData.id)) {
+                selectedModifiers.push(modifierData);
+            }
+        } else {
+            selectedModifiers = selectedModifiers.filter(item => item.id !== modifierData.id);
+        }
+        console.log(selectedModifiers)
+        updateSelectAllModifiers();
+    });
+
+
+    // Ensure 'Select All' reflects individual selections
+    function updateSelectAllModifiers() {
+        const allChecked = $(".modifier-checkbox:visible").length === $(".modifier-checkbox:visible:checked").length;
+        $("#AllModifiersSelect").prop("checked", allChecked);
+    }
+
+    // Restore checkbox states after pagination
+    function restoreCheckboxes() {
+        $(".modifier-checkbox").each(function () {
+            const modifierData = JSON.parse($(this).attr("data-modifier"));
+            if (selectedModifiers.some(mod => mod.id === modifierData.id)) {
+                $(this).prop("checked", true);
+            }
+        });
+    }
+    
+    function RestoreModifierList() {
+        selectedModifiers = [];
+        selectedModifiers = ModifiersOfCurrentModifierGroup.map(mod => ({ ...mod }));
+        restoreCheckboxes();
+    }
+
+
+
+    function AddExistingModifier() {
+        @* console.log(selectedExistingModifiers) *@
+
+            addedmodifierlist = selectedExistingModifiers.filter(mod =>
+                !ModifiersOfCurrentModifierGroup.some(existing => existing.id === mod.id)
+            );
+        ModifiersOfCurrentModifierGroup = selectedExistingModifiers.filter(mod =>
+            selectedExistingModifiers.some(existing => existing.id === mod.id)
+        );
+        @* console.log(addedmodifierlist); *@
+            @* console.log(ModifiersOfCurrentModifierGroup); *@
+            restoreExistingCheckboxes();
+        @* $('#AddExistingModifier').modal("hide"); *@
+            RendorModifiers();
+
+    }
+
+    function RendorModifiers() {
+        let list = ModifiersOfCurrentModifierGroup
+        $('#ExistingModifierList').empty();
+        $.each(ModifiersOfCurrentModifierGroup, function (i, modifier) {
+            $('#ExistingModifierList').append($(`<div class='badge rounded-pill bg-info text-dark w-25  my-2'> <span id="${modifier.id}">${modifier.name}</span><button type='button' class='btn-close' aria-label='Close' onclick='removeModifier(this)'></button></div>`));
+        });
+    }
+
+    function removeModifier(element) {
+        let id = parseInt($(element).siblings().attr("id"), 10);
+        if (!deletedmodifierlist.includes(id)) {
+            deletedmodifierlist.push(id);
+            $(element).parent().addClass('d-none');
+        }
+        ModifiersOfCurrentModifierGroup = ModifiersOfCurrentModifierGroup.filter(existing => existing.id !== id);
+    }
+
+    function DeleteModifierGroup(id) {
+        $('#DeleteModifierGroupId').val(id);
+    }
+
+function CancelMultipleDelete(){
+    selectedModifiers =[];
+    $(".modifier-checkbox:visible").each(function () {
+           $(this).prop("checked",false);
+    });
+}
+
+
+
+    @* fetch data for edit ModifierGroup *@
+        function EditModifierGroup(name, description, id) {
+            var currentmodifiergroup = {
+                Id: id,
+                Name: name,
+                Description: description
+            }
+            CurrentModifierGroupId = id;
+            $.ajax({
+                url: "Menu/EditModifierGroups",
+                type: 'POST',
+                data: currentmodifiergroup,
+                success: function (result) {
+                    $("#EditModifierModal .modal-content").empty().html(result.html);
+                    ModifiersOfCurrentModifierGroup = result.list;
+                    RendorModifiers();
+                    $("#EditModifierModal").modal('show');
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            });
+
+        }
+
     $(document).ready(function () {
-        $(document).on("change", "#itemperpage", function () {
+//Modifier table Pagination
+        $(document).off("click", "#itemperpageModifier").on("change", "#itemperpageModifier", function () {
             var size = $(this).val();
             var ps = {
                 page: currentPage,
@@ -84,11 +256,12 @@
             };
             if (size) {
                 $.ajax({
-                    url: "@Url.Action("PartialModiferTable", "Menu")",
+                    url: "@Url.Action("PartialModifierTable", "Menu")",
                     type: 'POST',
                     data: ps,
                     success: function (result) {
                         $('.ShowTable').html(result);
+                        restoreCheckboxes();
 
                     },
                     error: function (error) {
@@ -97,7 +270,8 @@
                 });
             }
         });
-        $(document).on("click", ".NextButton", function () {
+
+        $(document).off("click", ".NextButtonModifier").on("click", ".NextButtonModifier", function () {
             currentPage++;
             var pa = {
                 page: currentPage,
@@ -114,13 +288,15 @@
                 data: pa,
                 success: function (result) {
                     $('.ShowTable').html(result);
+                    restoreCheckboxes();
                 },
                 error: function (error) {
                     console.log(error, "error")
                 }
             });
         });
-        $(document).on("click", ".PreviousButton", function () {
+
+        $(document).off("click", ".PreviousButtonModifier").on("click", ".PreviousButtonModifier", function () {
             currentPage--;
             var p = {
                 page: currentPage,
@@ -137,13 +313,15 @@
                 data: p,
                 success: function (result) {
                     $('.ShowTable').html(result);
+                    restoreCheckboxes();
                 },
                 error: function (error) {
                     console.log(error, "error")
                 }
             });
         });
-        $(document).on("click", ".categoryrow", function () {
+
+        $(document).off("click", ".categoryrowModifier").on("click", ".categoryrowModifier", function () {
             categoryid = $(this).children('input').val();
             var p = {
                 CurrentSection: currentSection,
@@ -155,16 +333,15 @@
                 data: p,
                 success: function (result) {
                     $('.ShowTable').html(result);
+                    restoreCheckboxes();
                 },
                 error: function (error) {
                     console.log(error, "error")
                 }
             });
         });
-    });
 
-    @* search user *@
-        $(document).on("input", ".SearchItem", function () {
+        $(document).off("click", ".SearchItemModifier").on("input", ".SearchItemModifier", function () {
             currentSearch = $(this).val();
             var p = {
                 page: currentPage,
@@ -180,10 +357,246 @@
                 data: p,
                 success: function (result) {
                     $('.ShowTable').html(result);
+                    restoreCheckboxes();
                 },
                 error: function (error) {
                     console.log(error, "error")
                 }
             });
         });
+
+//Existing Modifier table Pagination
+        $(document).off("click", "#itemperpageExistingModifier").on("change", "#itemperpageExistingModifier", function () {
+            var size = $(this).val();
+            var ps = {
+                page: ExistingcurrentPage,
+                pageSize: size,
+                start: ExistingcurrentStart,
+                search: ExistingcurrentSearch,
+                currentSection: ExistingcurrentSection,
+                Category: 0
+            };
+            if (size) {
+                $.ajax({
+                    url: "@Url.Action("PartialExistingModifierTable", "Menu")",
+                    type: 'POST',
+                    data: ps,
+                    success: function (result) {
+                        $('#AddExistingModifier .modal-body').html(result);
+                        restoreExistingCheckboxes();
+
+                    },
+                    error: function (error) {
+                        console.log(error, "error")
+                    }
+                });
+            }
+        });
+
+        $(document).off("click", ".NextButtonExistingModifier").on("click", ".NextButtonExistingModifier", function () {
+            ExistingcurrentPage++;
+            var pa = {
+                page: ExistingcurrentPage,
+                pageSize: ExistingcurrentPageSize,
+                start: ExistingcurrentStart,
+                search: ExistingcurrentSearch,
+                count: ExistingcurrentCount,
+                currentSection: ExistingcurrentSection,
+                Category: 0
+            };
+            $.ajax({
+                url: "@Url.Action("PartialExistingModifierTable", "Menu")",
+                type: 'POST',
+                data: pa,
+                success: function (result) {
+                    $('#AddExistingModifier .modal-body').html(result);
+                    console.log(selectedExistingModifiers);
+                    restoreExistingCheckboxes();
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            });
+        });
+
+        $(document).off("click", ".PreviousButtonExistingModifier").on("click", ".PreviousButtonExistingModifier", function () {
+            ExistingcurrentPage--;
+            var p = {
+                page: ExistingcurrentPage,
+                pageSize: ExistingcurrentPageSize,
+                start: ExistingcurrentStart,
+                search: ExistingcurrentSearch,
+                count: ExistingcurrentCount,
+                currentSection: ExistingcurrentSection,
+                Category: 0
+            };
+            $.ajax({
+                url: "@Url.Action("PartialExistingModifierTable", "Menu")",
+                type: 'POST',
+                data: p,
+                success: function (result) {
+                    $('#AddExistingModifier .modal-body').html(result);
+                    restoreExistingCheckboxes();
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            });
+        });
+
+        $(document).off("click", ".categoryrowExistingModifier").on("click", ".categoryrowExistingModifier", function () {
+            categoryid = $(this).children('input').val();
+            var p = {
+                CurrentSection: ExistingcurrentSection,
+                Category: 0
+            };
+            $.ajax({
+                url: "@Url.Action("PartialExistingModifierTable", "Menu")",
+                type: 'POST',
+                data: p,
+                success: function (result) {
+                    $('#AddExistingModifier .modal-body').html(result);
+                    restoreExistingCheckboxes();
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            });
+        });
+
+        $(document).off("click", ".SearchItemExistingModifier").on("input", ".SearchItemExistingModifier", function () {
+            ExistingcurrentSearch = $(this).val();
+            var p = {
+                page: ExistingcurrentPage,
+                pageSize: ExistingcurrentPageSize,
+                start: ExistingcurrentStart,
+                search: ExistingcurrentSearch,
+                currentSection: ExistingcurrentSection,
+                Category: 0
+            };
+            $.ajax({
+                url: "@Url.Action("PartialExistingModifierTable", "Menu")",
+                type: 'POST',
+                data: p,
+                success: function (result) {
+                    $('#AddExistingModifier .modal-body').html(result);
+                    restoreExistingCheckboxes();
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            });
+        });
+
+
+        $(document).off("click", "#AddExistingModifierButton").on("click", "#AddExistingModifierButton", function () {
+
+            var pa = {
+                // currentSection: ExistingcurrentSection, 
+                Category: 0
+            };
+            $.ajax({
+                url: "@Url.Action("PartialExistingModifierTable", "Menu")",
+                type: 'POST',
+                data: pa,
+                success: function (result) {
+                    $('#AddExistingModifier .modal-body').empty().html(result);
+                    RestoreExistingModifierList();
+                    $("#AddExistingModifier").modal('show');
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            });
+        });
+
+
+        $(document).on("click", "#UpdateModifiersGroup", function () {
+            var updateddescription = $('#EditModifierGroupDescription').val();
+            var updatedname = $('#EditModifierGroupName').val();
+            var updatedexistingmodifierslist = ModifiersOfCurrentModifierGroup;
+            @* console.log(updatedexistingmodifierslist); *@
+            var modifiergroupbean = {
+                Id: CurrentModifierGroupId,
+                Name: updatedname,
+                Description: updateddescription,
+                ExistingModifier: updatedexistingmodifierslist
+            }
+            $.ajax({
+                url: "@Url.Action("UpdateModifiersGroup", "Menu")",
+                type: 'POST',
+                data: modifiergroupbean,
+                success: function (result) {
+
+                    $(".ModifierSection").trigger("click");
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            });
+        });
+
+        $(document).on("click","#AddNewModifier",function(){
+           $.ajax({
+                url: "Menu/AddnewModifier",
+                type: 'GET',
+                success: function (result) {
+                    $(".AddUpdateModals").empty().html(result);
+                    $("#AddModifierModal").modal('show');
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            }); 
+        });
+       
+        $(document).on("click","#EditModifier",function(){
+        
+            let modifierid=$(this).data('id');
+           $.ajax({
+                url: "Menu/UpdateModifier",
+                type: 'GET',
+                data: { id : modifierid},
+                success: function (result) {
+                    $(".AddUpdateModals").empty().html(result);
+                    $("#UpdateModifierModal").modal('show');
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            }); 
+        });
+
+        $(document).on("click","#MultipleDeleteModifier",function(){
+            $.ajax({
+                url: "Menu/DeleteModifier",
+                type: 'POST',
+                data: {list:selectedModifiers},
+                success: function () {
+                    console.log("deletedmodifierlist Successfully");
+                    $('#MultipleDeleteModal').modal("hide");
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            });
+        });
+    
+        $(document).on("click","#DeleteModifier",function(){
+            let modifier =$(this).data("modifier");
+            $.ajax({
+                url: "Menu/DeleteModifier",
+                type: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify({ list: [modifier] }),
+                success: function () {
+                    console.log("deletedmodifierlist Successfully");
+                },
+                error: function (error) {
+                    console.log(error, "error")
+                }
+            });
+        });
+    });
+
 </script>

@@ -1,0 +1,53 @@
+@using Entity.Helper
+@model Entity.Helper.MenuServiceModel
+
+<input type="number" asp-for="@Model.ModifierGroup.Id" id="EditModifierGroupId" hidden>
+<div class="modal-header">
+    <h5 class="modal-title" id="">Edit Modifier Group </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body d-flex flex-column  align-item-center justify-content-center">
+    <div class="form-floating mb-3">
+        <input type="text" asp-for="@Model.ModifierGroup.Name" class="form-control" id="EditModifierGroupName"
+            placeholder="Name">
+        <label for="EditModifierGroupName">Name</label>
+    </div>
+    <div class="form-floating">
+        <input type="text" asp-for="@Model.ModifierGroup.Description" class="form-control"
+            id="EditModifierGroupDescription" placeholder="Description">
+        <label for="EditModifierGroupDescription">Description</label>
+    </div>
+    <div class="form-floating ">
+        <span class="text-primary" id="AddExistingModifierButton">+ Add Existing
+            Modifiers</span>
+        <div id="ExistingModifierList">
+            @* list of Existing Modifiers *@
+        </div>
+
+    </div>
+</div>
+<div class="modal-footer d-flex align-item-center justify-content-end">
+    <button type="button" id="UpdateModifiersGroup"  data-bs-dismiss="modal" class="btn btn-primary">Save</button>
+    <input type="reset" class="btn btn-secondary" data-bs-dismiss="modal" value="Cancel">
+</div>
+
+@* Add Existing Modifier Modal *@
+<div class="modal fade" id="AddExistingModifier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="">Select Existing Modifiers</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="RestoreModifierList()" aria-label="Close"></button>
+            </div>
+                <input type="search" class=" mx-2  d-sm-block form-control SearchItemExistingModifier w-25"
+                    placeholder="Search">
+            <div class="modal-body d-flex flex-column  align-item-center justify-content-center">
+                @* all Existing Modifiers *@
+            </div>
+            <div class="modal-footer d-flex align-item-center justify-content-end">
+                <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" onclick="AddExistingModifier()" >Add</button>
+                <input type="reset" class="btn btn-secondary btn_close" data-bs-dismiss="modal" onclick="RestoreModifierList()" value="Cancel">
+            </div>
+        </div>
+    </div>
+</div>

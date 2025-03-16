@@ -11,6 +11,7 @@
     <title>@ViewData["Title"] - PizzaShop</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="https://cdn.jsdelivr.net/npm/notyf/notyf.min.css" rel="stylesheet">
 </head>
 
 <body class="m-0 p-0 vh-100">
@@ -242,12 +243,16 @@
         </div>
     </div>
 </div>
-
+@using AspNetCoreHero.ToastNotification.Abstractions
+@using AspNetCoreHero.ToastNotification.Notyf
+@inject INotyfService Notyf
+@Html.Raw(Notyf)
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf/notyf.min.js"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)

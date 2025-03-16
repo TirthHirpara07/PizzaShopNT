@@ -9,6 +9,8 @@ public class ItemPagination
         public int start { get; set; }
         public int end { get; set; }
         public string search { get; set; }
+
+        //also used for ModifierGroup id
         public int Category  { get; set; }
         public int ModifierGroup  { get; set; }
         public string Currentsection { get; set;}

@@ -10,7 +10,7 @@ public class MenuServiceModel
     public List<ShowItem> ItemList { get; set; }
     public ShowModifierGroup ModifierGroup { get; set; }
     public ShowModifier Modifier { get; set; }
-    public List<ShowModifierGroup> ModifierGroupList { get; set; }
+    public List<ShowModifierGroup>  ModifierGroupList { get; set; }
     public List<ShowModifier> ModifierList { get; set; }
 
 }

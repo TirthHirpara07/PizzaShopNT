@@ -19,7 +19,5 @@ public partial class Department
 
     public int? Createdby { get; set; }
 
-    public virtual User? ModifiedbyNavigation { get; set; }
-
     public virtual ICollection<Permission> Permissions { get; set; } = new List<Permission>();
 }

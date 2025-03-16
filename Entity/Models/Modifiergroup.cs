@@ -19,6 +19,8 @@ public partial class Modifiergroup
 
     public int? Modifiedby { get; set; }
 
+    public string? Modifiergroupdescription { get; set; }
+
     public virtual ICollection<Item> Items { get; set; } = new List<Item>();
 
     public virtual ICollection<Modifier> Modifiers { get; set; } = new List<Modifier>();

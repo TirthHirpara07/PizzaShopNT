@@ -105,6 +105,8 @@ public partial class PizzaShopContext : DbContext
 
             entity.ToTable("city");
 
+            entity.HasIndex(e => e.Stateid, "IX_city_stateid");
+
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("id");
@@ -154,6 +156,8 @@ public partial class PizzaShopContext : DbContext
 
             entity.ToTable("customer");
 
+            entity.HasIndex(e => e.Lastorderid, "IX_customer_lastorderid");
+
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("id");
@@ -186,6 +190,8 @@ public partial class PizzaShopContext : DbContext
 
             entity.ToTable("customerwaiting");
 
+            entity.HasIndex(e => e.Customerid, "IX_customerwaiting_customerid");
+
             entity.Property(e => e.Tokenid)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("tokenid");
@@ -216,6 +222,7 @@ public partial class PizzaShopContext : DbContext
 
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
+                .HasIdentityOptions(9L, null, null, null, null, null)
                 .HasColumnName("id");
             entity.Property(e => e.Createdby).HasColumnName("createdby");
             entity.Property(e => e.Createddate)
@@ -229,10 +236,6 @@ public partial class PizzaShopContext : DbContext
             entity.Property(e => e.Modifieddate)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("modifieddate");
-
-            entity.HasOne(d => d.ModifiedbyNavigation).WithMany(p => p.Departments)
-                .HasForeignKey(d => d.Modifiedby)
-                .HasConstraintName("ModifiedBy");
         });
 
         modelBuilder.Entity<Favouriteitem>(entity =>
@@ -240,6 +243,10 @@ public partial class PizzaShopContext : DbContext
             entity.HasKey(e => e.Id).HasName("Favourite_Items_pkey");
 
             entity.ToTable("favouriteitems");
+
+            entity.HasIndex(e => e.Categoryid, "IX_favouriteitems_categoryid");
+
+            entity.HasIndex(e => e.Itemid, "IX_favouriteitems_itemid");
 
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
@@ -258,12 +265,14 @@ public partial class PizzaShopContext : DbContext
 
         modelBuilder.Entity<Feedback>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("Ratings_pkey");
+            entity.HasKey(e => e.Id).HasName("Feedback_pkey");
 
             entity.ToTable("feedback");
 
+            entity.HasIndex(e => e.Orderid, "IX_feedback_orderid");
+
             entity.Property(e => e.Id)
-                .HasDefaultValueSql("nextval('\"Ratings_rate_id_seq\"'::regclass)")
+                .UseIdentityAlwaysColumn()
                 .HasColumnName("id");
             entity.Property(e => e.Ambience).HasColumnName("ambience");
             entity.Property(e => e.Comment)
@@ -295,7 +304,7 @@ public partial class PizzaShopContext : DbContext
             entity.ToTable("invoice");
 
             entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
+                .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.Createdby).HasColumnName("createdby");
             entity.Property(e => e.Createddate)
@@ -320,6 +329,10 @@ public partial class PizzaShopContext : DbContext
             entity.HasKey(e => e.Itemid).HasName("Item_pkey");
 
             entity.ToTable("item");
+
+            entity.HasIndex(e => e.Categoryid, "IX_item_categoryid");
+
+            entity.HasIndex(e => e.Modifierid, "IX_item_modifierid");
 
             entity.Property(e => e.Itemid)
                 .UseIdentityAlwaysColumn()
@@ -372,6 +385,12 @@ public partial class PizzaShopContext : DbContext
 
             entity.ToTable("kot");
 
+            entity.HasIndex(e => e.Itemid, "IX_kot_itemid");
+
+            entity.HasIndex(e => e.Orderid, "IX_kot_orderid");
+
+            entity.HasIndex(e => e.Tableid, "IX_kot_tableid");
+
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("id");
@@ -409,6 +428,8 @@ public partial class PizzaShopContext : DbContext
             entity.HasKey(e => e.Id).HasName("Modifier_pkey");
 
             entity.ToTable("modifier");
+
+            entity.HasIndex(e => e.Modifiergroupid, "IX_modifier_modifiergroupid");
 
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
@@ -459,6 +480,9 @@ public partial class PizzaShopContext : DbContext
             entity.Property(e => e.Modifieddate)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("modifieddate");
+            entity.Property(e => e.Modifiergroupdescription)
+                .HasColumnType("character varying")
+                .HasColumnName("modifiergroupdescription");
             entity.Property(e => e.Modifiergroupname)
                 .HasColumnType("character varying")
                 .HasColumnName("modifiergroupname");
@@ -469,6 +493,12 @@ public partial class PizzaShopContext : DbContext
             entity.HasKey(e => e.Id).HasName("Order_pkey");
 
             entity.ToTable("order");
+
+            entity.HasIndex(e => e.Customerid, "IX_order_customerid");
+
+            entity.HasIndex(e => e.Modifierid, "IX_order_modifierid");
+
+            entity.HasIndex(e => e.Paymentid, "IX_order_paymentid");
 
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
@@ -512,6 +542,10 @@ public partial class PizzaShopContext : DbContext
 
             entity.ToTable("orderdetails");
 
+            entity.HasIndex(e => e.Itemid, "IX_orderdetails_itemid");
+
+            entity.HasIndex(e => e.Orderid, "IX_orderdetails_orderid");
+
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("id");
@@ -546,6 +580,10 @@ public partial class PizzaShopContext : DbContext
 
             entity.ToTable("ordertax");
 
+            entity.HasIndex(e => e.Orderid, "IX_ordertax_orderid");
+
+            entity.HasIndex(e => e.Taxid, "IX_ordertax_taxid");
+
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Createdby).HasColumnName("createdby");
             entity.Property(e => e.Createddate)
@@ -574,6 +612,8 @@ public partial class PizzaShopContext : DbContext
 
             entity.ToTable("payments");
 
+            entity.HasIndex(e => e.Invoiceid, "IX_payments_invoiceid");
+
             entity.Property(e => e.Paymentid)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("paymentid");
@@ -598,6 +638,10 @@ public partial class PizzaShopContext : DbContext
             entity.HasKey(e => e.Permissionid).HasName("Permission_pkey");
 
             entity.ToTable("permission");
+
+            entity.HasIndex(e => e.Deptid, "IX_permission_deptid");
+
+            entity.HasIndex(e => e.Roleid, "IX_permission_roleid");
 
             entity.Property(e => e.Permissionid)
                 .UseIdentityAlwaysColumn()
@@ -682,6 +726,8 @@ public partial class PizzaShopContext : DbContext
 
             entity.ToTable("state");
 
+            entity.HasIndex(e => e.Countryid, "IX_state_countryid");
+
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("id");
@@ -709,6 +755,10 @@ public partial class PizzaShopContext : DbContext
             entity.HasKey(e => e.Tableid).HasName("Table_pkey");
 
             entity.ToTable("table");
+
+            entity.HasIndex(e => e.Customerid, "IX_table_customerid");
+
+            entity.HasIndex(e => e.Sectionid, "IX_table_sectionid");
 
             entity.Property(e => e.Tableid)
                 .UseIdentityAlwaysColumn()
@@ -776,8 +826,13 @@ public partial class PizzaShopContext : DbContext
 
             entity.ToTable("user");
 
+            entity.HasIndex(e => e.Addressid, "IX_user_addressid");
+
+            entity.HasIndex(e => e.Roleid, "IX_user_roleid");
+
             entity.Property(e => e.Userid)
                 .UseIdentityAlwaysColumn()
+                .HasIdentityOptions(2L, null, null, null, null, null)
                 .HasColumnName("userid");
             entity.Property(e => e.Addressid).HasColumnName("addressid");
             entity.Property(e => e.Createdby).HasColumnName("createdby");
@@ -823,6 +878,16 @@ public partial class PizzaShopContext : DbContext
             entity.HasKey(e => e.Id).HasName("UserAddress_pkey");
 
             entity.ToTable("useraddress");
+
+            entity.HasIndex(e => e.City, "IX_useraddress_city");
+
+            entity.HasIndex(e => e.Country, "IX_useraddress_country");
+
+            entity.HasIndex(e => e.Createdby, "IX_useraddress_createdby");
+
+            entity.HasIndex(e => e.Modifiedby, "IX_useraddress_modifiedby");
+
+            entity.HasIndex(e => e.State, "IX_useraddress_state");
 
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
@@ -873,12 +938,14 @@ public partial class PizzaShopContext : DbContext
 
             entity.ToTable("userlogin");
 
+            entity.HasIndex(e => e.Roleid, "IX_userlogin_roleid");
+
+            entity.HasIndex(e => e.Userid, "IX_userlogin_userid");
+
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
-                .HasIdentityOptions(7L, null, null, null, null, null)
                 .HasColumnName("id");
-            entity.Property(e => e.Createdby)
-                .HasColumnName("createdby");
+            entity.Property(e => e.Createdby).HasColumnName("createdby");
             entity.Property(e => e.Createddate)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
@@ -890,8 +957,7 @@ public partial class PizzaShopContext : DbContext
                 .HasColumnType("character varying")
                 .HasColumnName("hashpassword");
             entity.Property(e => e.Isdeleted).HasColumnName("isdeleted");
-            entity.Property(e => e.Modifiedby)
-                .HasColumnName("modifiedby");
+            entity.Property(e => e.Modifiedby).HasColumnName("modifiedby");
             entity.Property(e => e.Modifieddate)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")

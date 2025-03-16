@@ -84,4 +84,62 @@ public class MenuService : IMenuService
         var (list,count) = _modifierrepo.GetModifierByModifierGroups(p.Category,p.page,p.pageSize,p.search);
         return(list,count);
     }
+
+    public async Task<string> UpdateModifiersGroup(ShowModifierGroup bean)
+    {
+         bool isupdated =await _modifierrepo.UpdateModifiersGroup(bean);
+        if(isupdated){
+        //    _notyf.Success("ModifierGroup Updated Successfully");
+           return "Success";
+        }
+        // else _notyf.Error("ModifierGroup didn't Updated");
+        return  "Failure";
+    }
+
+    public async Task<RedirectResult> DeleteModifierGroup(int id)
+    {
+       bool isdeleted =await _modifierrepo.DeleteModifierGroup(id);
+        if(isdeleted){
+           _notyf.Success("Modifier Group Deleted Successfully");
+        }
+        else _notyf.Error("Modifier Group didn't Deleted");
+        return  new RedirectResult { shouldRedirect = true, controller = "Menu", action = "index" };
+    }
+
+    public async Task<RedirectResult> AddnewModifier(ShowModifier bean)
+    {
+       bool isadded =await _modifierrepo.AddnewModifier(bean);
+        if(isadded){
+           _notyf.Success("Modifier Added Successfully");
+        }
+        else _notyf.Error("Modifier Already Exist ");
+        return  new RedirectResult { shouldRedirect = true, controller = "Menu", action = "index" };
+
+    }
+
+    public async Task<ShowModifier> GetModifier(int id)
+    {
+       return await _modifierrepo.GetModifier(id);
+    }
+
+    public async Task<RedirectResult> UpdateModifier(ShowModifier bean)
+    {
+         bool isupdated =await _modifierrepo.UpdateModifier(bean);
+        if(isupdated){
+           _notyf.Success("Modifier Updated Successfully");
+        }
+        else _notyf.Error("Modifier Didn't Updated ");
+        return  new RedirectResult { shouldRedirect = true, controller = "Menu", action = "index" };
+
+    }
+
+    public async Task<RedirectResult> DeleteModifier(List<ShowModifier> list)
+    {
+        bool isdeleted =await _modifierrepo.DeleteModifier(list);
+        if(isdeleted){
+           _notyf.Success("Modifiers Deleted Successfully");
+        }
+        else _notyf.Error("Modifiers Didn't Deleted ");
+        return  new RedirectResult { shouldRedirect = true, controller = "Menu", action = "index" };
+    }
 }

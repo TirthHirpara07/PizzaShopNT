@@ -4,6 +4,7 @@ namespace Entity.ViewModal;
 
 public class ShowModifierGroup
 {
+  
       public int Id { get; set; }
     public string Name { get; set; }
 

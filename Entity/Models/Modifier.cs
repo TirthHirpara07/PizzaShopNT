@@ -13,7 +13,7 @@ public partial class Modifier
 
     public string Unit { get; set; } = null!;
 
-    public int Modifierrate { get; set; }
+    public double Modifierrate { get; set; }
 
     public int Modifierquantity { get; set; }
 
